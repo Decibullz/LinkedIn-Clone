@@ -64,7 +64,7 @@ const ArtCard = styled.div`
   transition: box-shadow 83ms;
   position: relative;
   border: none;
-  box-shadow: 0 0 0 1px rgba(0 0 0 / 15%), 0 0 0 rgba(0 0 0 / 20%);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 15%), 0 0 0 rgb(0 0 0 / 20%);
 `
 
 const UserInfo = styled.div`
