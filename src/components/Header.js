@@ -191,7 +191,7 @@ const NavList = styled.li`
       align-items: center;
     }
 
-    @media (maxwidth: 768px) {
+    @media (max-width: 768px) {
       min-width: 70px;
     }
   }
