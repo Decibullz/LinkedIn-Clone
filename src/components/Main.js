@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import PostModal from './PostModal'
 
 const Main = (props) => {
   return (
@@ -86,6 +87,9 @@ const Main = (props) => {
             </button>
           </SocialActions>
         </Article>
+      </div>
+      <div>
+        <PostModal />
       </div>
     </Container>
   )
