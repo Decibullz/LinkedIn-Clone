@@ -263,6 +263,8 @@ const SocialActions = styled.div`
   min-height: 40px;
   padding: 4px 8px;
   button {
+    background: none;
+    border: none;
     display: inline-flex;
     align-items: center;
     padding: 8px;
