@@ -1,9 +1,15 @@
 import styled from 'styled-components'
 import PostModal from './PostModal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { getArticlesAPI } from '../redux/actions'
 
 const Main = (props) => {
   const [showModal, setShowModal] = useState('close')
+
+  useEffect(() => {
+    props.getArticles()
+  }, [])
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -25,10 +31,15 @@ const Main = (props) => {
   return (
     <Container>
       <ShareBox>
-        Share
         <div>
-          <img src="/images/user.svg" alt="" />
-          <button onClick={handleClick}>Start a post</button>
+          {props.user && props.user.photoURL ? (
+            <img src={props.user.photoURL} alt="" srcset="" />
+          ) : (
+            <img src="/images/user.svg" alt="" />
+          )}
+          <button onClick={handleClick} disabled={props.loading ? true : false}>
+            Start a post
+          </button>
         </div>
         <div>
           <button>
@@ -49,7 +60,8 @@ const Main = (props) => {
           </button>
         </div>
       </ShareBox>
-      <div>
+      <Content>
+        {props.loading && <img src="/images/spin-loader.svg" alt="" />}
         <Article>
           <SharedActor>
             <a>
@@ -107,7 +119,7 @@ const Main = (props) => {
             </button>
           </SocialActions>
         </Article>
-      </div>
+      </Content>
       <div>
         <PostModal showModal={showModal} handleClick={handleClick} />
       </div>
@@ -299,4 +311,22 @@ const SocialActions = styled.div`
   }
 `
 
-export default Main
+const Content = styled.div`
+  text-align: center;
+  & > img {
+    width: 30px;
+  }
+`
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+    loading: state.articleState.loading,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  getArticles: () => dispatch(getArticlesAPI()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
