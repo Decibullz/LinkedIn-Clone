@@ -29,101 +29,110 @@ const Main = (props) => {
     }
   }
   return (
-    <Container>
-      <ShareBox>
-        <div>
-          {props.user && props.user.photoURL ? (
-            <img src={props.user.photoURL} alt="" srcset="" />
-          ) : (
-            <img src="/images/user.svg" alt="" />
-          )}
-          <button onClick={handleClick} disabled={props.loading ? true : false}>
-            Start a post
-          </button>
-        </div>
-        <div>
-          <button>
-            <img src="images/photo-icon.svg " alt="" />
-            <span>Photo</span>
-          </button>
-          <button>
-            <img src="/images/video-icon.svg" alt="" />
-            <span>Video</span>
-          </button>
-          <button>
-            <img src="/images/event-icon.svg" alt="" />
-            <span>Events</span>
-          </button>
-          <button>
-            <img src="/images/article-icon.svg" alt="" />
-            <span>Write article</span>
-          </button>
-        </div>
-      </ShareBox>
-      <Content>
-        {props.loading && <img src="/images/spin-loader.svg" alt="" />}
-        <Article>
-          <SharedActor>
-            <a>
-              <img src="/images/user.svg" alt="" />
-              <div>
-                <span>Title</span>
-                <span>Info</span>
-                <span>Date</span>
-              </div>
-            </a>
-            <button>
-              <img src="/images/ellipses.svg" alt="" />
-            </button>
-          </SharedActor>
-          <Description>Description</Description>
-          <SharedImg>
-            <a>
-              <img src="/images/shared-image.jpeg" alt="" />
-            </a>
-          </SharedImg>
-          <SocialCounts>
-            <li>
-              <button>
-                <img
-                  src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb"
-                  alt=""
-                />
-                <img
-                  src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f"
-                  alt=""
-                />
-                <span>75</span>
+    <>
+      {props.articles.length === 0 ? (
+        <p>There are no articles</p>
+      ) : (
+        <Container>
+          <ShareBox>
+            <div>
+              {props.user && props.user.photoURL ? (
+                <img src={props.user.photoURL} alt="" />
+              ) : (
+                <img src="/images/user.svg" alt="" />
+              )}
+              <button
+                onClick={handleClick}
+                disabled={props.loading ? true : false}
+              >
+                Start a post
               </button>
-            </li>
-            <li>
-              <a>2 Comments</a>
-            </li>
-          </SocialCounts>
-          <SocialActions>
-            <button>
-              <img src="/images/like-icon.svg" alt="" />
-              <span>Like</span>
-            </button>
-            <button>
-              <img src="/images/comments-icon.svg" alt="" />
-              <span>Comments</span>
-            </button>
-            <button>
-              <img src="/images/share-icon.svg" alt="" />
-              <span>Share</span>
-            </button>
-            <button>
-              <img src="/images/send-icon.svg" alt="" />
-              <span>Send</span>
-            </button>
-          </SocialActions>
-        </Article>
-      </Content>
-      <div>
-        <PostModal showModal={showModal} handleClick={handleClick} />
-      </div>
-    </Container>
+            </div>
+            <div>
+              <button>
+                <img src="images/photo-icon.svg " alt="" />
+                <span>Photo</span>
+              </button>
+              <button>
+                <img src="/images/video-icon.svg" alt="" />
+                <span>Video</span>
+              </button>
+              <button>
+                <img src="/images/event-icon.svg" alt="" />
+                <span>Events</span>
+              </button>
+              <button>
+                <img src="/images/article-icon.svg" alt="" />
+                <span>Write article</span>
+              </button>
+            </div>
+          </ShareBox>
+          <Content>
+            {props.loading && <img src="/images/spin-loader.svg" alt="" />}
+            <Article>
+              <SharedActor>
+                <a>
+                  <img src="/images/user.svg" alt="" />
+                  <div>
+                    <span>Title</span>
+                    <span>Info</span>
+                    <span>Date</span>
+                  </div>
+                </a>
+                <button>
+                  <img src="/images/ellipses.svg" alt="" />
+                </button>
+              </SharedActor>
+              <Description>Description</Description>
+              <SharedImg>
+                <a>
+                  <img src="/images/shared-image.jpeg" alt="" />
+                </a>
+              </SharedImg>
+              <SocialCounts>
+                <li>
+                  <button>
+                    <img
+                      src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb"
+                      alt=""
+                    />
+                    <img
+                      src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f"
+                      alt=""
+                    />
+                    <span>75</span>
+                  </button>
+                </li>
+                <li>
+                  <a>2 Comments</a>
+                </li>
+              </SocialCounts>
+              <SocialActions>
+                <button>
+                  <img src="/images/like-icon.svg" alt="" />
+                  <span>Like</span>
+                </button>
+                <button>
+                  <img src="/images/comments-icon.svg" alt="" />
+                  <span>Comments</span>
+                </button>
+                <button>
+                  <img src="/images/share-icon.svg" alt="" />
+                  <span>Share</span>
+                </button>
+                <button>
+                  <img src="/images/send-icon.svg" alt="" />
+                  <span>Send</span>
+                </button>
+              </SocialActions>
+            </Article>
+          </Content>
+          <div>
+            <PostModal showModal={showModal} handleClick={handleClick} />
+          </div>
+        </Container>
+      )}{' '}
+    </>
   )
 }
 
@@ -322,6 +331,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.userState.user,
     loading: state.articleState.loading,
+    articles: state.articleState.articles,
   }
 }
 
